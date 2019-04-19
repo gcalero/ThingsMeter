@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.course.android.thingmeterview.ThingMeterView
+        android:id="@+id/thingMeterView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundColor="@android:color/darker_gray"
+        app:borderWidth="2dp"
+        app:markColor="@color/colorAccent"
+        app:markWidth="3dp"
+        app:markParts="10"
+        app:font="@font/lato_hairline"
+        app:value="0"
+        app:labelText="Potential [V]"
+        app:textColor="@color/colorPrimary"
+        app:textSize="50sp"
+        app:minValue="110"
+        app:maxValue="220"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
