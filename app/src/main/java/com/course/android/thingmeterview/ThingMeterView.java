@@ -12,9 +12,13 @@ import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.AccessibilityDelegateCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 
 public class ThingMeterView extends View {
 
@@ -68,8 +72,35 @@ public class ThingMeterView extends View {
         super(context, attrs);
 
         setupAttrs(attrs);
+        installAccessibilityDelegate();
+
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Send an AccessibilityEvent, since the user has interacted with the view.
+                sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+            }
+        });
     }
 
+    private void installAccessibilityDelegate() {
+        ViewCompat.setAccessibilityDelegate(this, new AccessibilityDelegateCompat() {
+            @Override
+            public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
+                super.onPopulateAccessibilityEvent(host, event);
+                int eventType = event.getEventType();
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED ||
+                        eventType == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                    event.getText().add(mLabel + " " + mValue);
+                }
+            }
+
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+            }
+        });
+    }
 
 
     private void setupAttrs(AttributeSet attrs) {
@@ -386,6 +417,5 @@ Log.d(TAG, "Mark parts: " + mMarkParts);
                     }
                 };
     }
-
 
 }

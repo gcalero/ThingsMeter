@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ThingMeterView</string>
+    <string name="potential">Potential</string>
+    <string name="meter_view_label">Potential [V]</string>
 </resources>

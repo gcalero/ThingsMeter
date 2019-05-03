@@ -17,7 +17,7 @@
         app:markParts="10"
         app:font="@font/lato_hairline"
         app:value="0"
-        app:labelText="Potential [V]"
+        app:labelText="@string/meter_view_label"
         app:textColor="@color/colorPrimary"
         app:textSize="50sp"
         app:minValue="110"
